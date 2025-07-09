@@ -6,32 +6,7 @@ return {
     "hrsh7th/cmp-buffer",
     "hrsh7th/cmp-path",
     "saadparwaiz1/cmp_luasnip",
-    {
-      "L3MON4D3/LuaSnip",
-      version = "v2.*",
-      build = "make install_jsregexp",
-      dependencies = {
-        "rafamadriz/friendly-snippets",
-      },
-      config = function()
-        require("luasnip.loaders.from_vscode").lazy_load()
-
-        local ls = require("luasnip")
-
-        ls.add_snippets("lua", {
-          ls.snippet("lf", {
-            ls.text_node("local function "),
-            ls.insert_node(1, "name"),
-            ls.text_node("("),
-            ls.insert_node(2),
-            ls.text_node(")"),
-            ls.text_node({ "", "\t" }),
-            ls.insert_node(0),
-            ls.text_node({ "", "end" }),
-          }),
-        })
-      end,
-    },
+    "L3MON4D3/LuaSnip",
   },
   opts = function()
     local cmp = require("cmp")

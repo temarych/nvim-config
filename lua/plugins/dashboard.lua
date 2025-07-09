@@ -1,6 +1,7 @@
 return {
   "goolord/alpha-nvim",
-  dependencies = { 'nvim-tree/nvim-web-devicons', 'folke/tokyonight.nvim' },
+  event = "VimEnter",
+  dependencies = { "nvim-tree/nvim-web-devicons", "folke/tokyonight.nvim" },
   config = function()
     local startify = require("alpha.themes.startify")
 
@@ -18,8 +19,6 @@ return {
       [[                                                \/__/                ]],
     }
 
-    require("alpha").setup(
-      startify.config
-    )
+    require("alpha").setup(startify.config)
   end,
 }

@@ -1,7 +1,6 @@
 return {
   {
     "neovim/nvim-lspconfig",
-    event = { "BufReadPre", "BufNewFile" },
     config = function()
       vim.api.nvim_create_autocmd("BufWritePre", {
         callback = function()
@@ -12,7 +11,6 @@ return {
   },
   {
     "mason-org/mason-lspconfig.nvim",
-    event = { "BufReadPre", "BufNewFile" },
     dependencies = {
       "neovim/nvim-lspconfig",
       "mason-org/mason.nvim",
