@@ -5,6 +5,15 @@ return {
     "sindrets/diffview.nvim",
     "nvim-telescope/telescope.nvim",
   },
+  keys = {
+    {
+      "<leader>gg",
+      function()
+        require("neogit").open()
+      end,
+      desc = "Open Neogit",
+    },
+  },
   opts = {
     integrations = {
       diffview = true,
