@@ -40,6 +40,88 @@ return {
         hide_dotfiles = false,
         hide_gitignored = true,
       },
+      components = {
+        harpoon_index = function(config, node, _)
+          local harpoon_list = require("harpoon"):list()
+          local path = node:get_id()
+          local harpoon_key = vim.uv.cwd()
+
+          for i, item in ipairs(harpoon_list.items) do
+            local value = item.value
+            if string.sub(item.value, 1, 1) ~= "/" then
+              value = harpoon_key .. "/" .. item.value
+            end
+
+            if value == path then
+              vim.print(path)
+              return {
+                text = string.format(" ⥤ %d", i),
+                highlight = config.highlight or "NeoTreeDirectoryIcon",
+              }
+            end
+          end
+          return {}
+        end,
+      },
+      renderers = {
+        file = {
+          { "indent" },
+          { "icon" },
+          {
+            "container",
+            content = {
+              {
+                "name",
+                zindex = 10,
+              },
+              {
+                "symlink_target",
+                zindex = 10,
+                highlight = "NeoTreeSymbolicLinkTarget",
+              },
+              { "harpoon_index", zindex = 10 },
+              { "clipboard",     zindex = 10 },
+              { "bufnr",         zindex = 10 },
+              { "modified",      zindex = 20, align = "right" },
+              { "diagnostics",   zindex = 20, align = "right" },
+              { "git_status",    zindex = 10, align = "right" },
+              { "file_size",     zindex = 10, align = "right" },
+              { "type",          zindex = 10, align = "right" },
+              { "last_modified", zindex = 10, align = "right" },
+              { "created",       zindex = 10, align = "right" },
+            },
+          },
+        },
+        directory = {
+          { "indent" },
+          { "icon" },
+          { "current_filter" },
+          {
+            "container",
+            content = {
+              { "name",      zindex = 10 },
+              {
+                "symlink_target",
+                zindex = 10,
+                highlight = "NeoTreeSymbolicLinkTarget",
+              },
+              { "clipboard", zindex = 10 },
+              {
+                "diagnostics",
+                errors_only = true,
+                zindex = 20,
+                align = "right",
+                hide_when_expanded = true,
+              },
+              { "git_status",    zindex = 10, align = "right", hide_when_expanded = true },
+              { "file_size",     zindex = 10, align = "right" },
+              { "type",          zindex = 10, align = "right" },
+              { "last_modified", zindex = 10, align = "right" },
+              { "created",       zindex = 10, align = "right" },
+            },
+          },
+        },
+      },
     },
     window = {
       mappings = {
@@ -60,7 +142,7 @@ return {
     default_component_configs = {
       indent = {
         with_expanders = true,
-        expander_collapsed = "",
+        expander_collapsed = "❯",
         expander_expanded = "",
         expander_highlight = "NeoTreeExpander",
       },
