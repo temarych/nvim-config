@@ -19,8 +19,6 @@ return {
 			automatic_enable = {
 				exclude = {
 					"rust_analyzer",
-					"ty",
-					-- "pyright",
 				},
 			},
 		},

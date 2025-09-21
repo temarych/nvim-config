@@ -10,6 +10,35 @@ return {
 	},
 	opts = function()
 		local cmp = require("cmp")
+
+		local kind_icons = {
+			Text = "",
+			Method = "󰆧",
+			Function = "󰊕",
+			Constructor = "",
+			Field = "󰇽",
+			Variable = "󰂡",
+			Class = "󰠱",
+			Interface = "",
+			Module = "",
+			Property = "󰜢",
+			Unit = "",
+			Value = "󰎠",
+			Enum = "",
+			Keyword = "󰌋",
+			Snippet = "",
+			Color = "󰏘",
+			File = "󰈙",
+			Reference = "󰈇",
+			Folder = "󰉋",
+			EnumMember = "",
+			Constant = "󰏿",
+			Struct = "",
+			Event = "",
+			Operator = "󰆕",
+			TypeParameter = "󰊄",
+		}
+
 		return {
 			completion = {
 				completeopt = "menu,menuone,noinsert",
@@ -18,6 +47,10 @@ return {
 				expand = function(args)
 					require("luasnip").lsp_expand(args.body)
 				end,
+			},
+			window = {
+				completion = cmp.config.window.bordered(),
+				documentation = cmp.config.window.bordered(),
 			},
 			mapping = cmp.mapping.preset.insert({
 				["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
@@ -52,6 +85,12 @@ return {
 					end
 				end, { "i", "s" }),
 			}),
+			formatting = {
+				format = function(entry, vim_item)
+					vim_item.kind = kind_icons[vim_item.kind] .. " " .. vim_item.kind
+					return vim_item
+				end,
+			},
 			sources = cmp.config.sources({
 				{ name = "nvim_lsp" },
 				{ name = "luasnip" },
