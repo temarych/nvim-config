@@ -13,6 +13,3 @@ vim.keymap.set("n", "go", vim.lsp.buf.type_definition)
 vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float)
 
 vim.keymap.set("n", "<leader>?", vim.cmd.map, { desc = "Show keymaps" })
-vim.keymap.set("n", "<leader>/", vim.cmd.nmap, { desc = "Show normal mode keymaps" })
-vim.keymap.set("v", "<leader>/", vim.cmd.vmap, { desc = "Show visual mode keymaps" })
-vim.keymap.set("i", "<leader>/", vim.cmd.imap, { desc = "Show insert mode keymaps" })

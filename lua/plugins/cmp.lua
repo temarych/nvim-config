@@ -91,12 +91,12 @@ return {
 					return vim_item
 				end,
 			},
-			sources = cmp.config.sources({
+			sources = {
 				{ name = "nvim_lsp" },
-				{ name = "luasnip" },
 				{ name = "buffer" },
 				{ name = "path" },
-			}),
+				{ name = "luasnip" },
+			},
 		}
 	end,
 }

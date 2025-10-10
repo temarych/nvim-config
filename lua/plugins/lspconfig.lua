@@ -19,6 +19,7 @@ return {
 			automatic_enable = {
 				exclude = {
 					"rust_analyzer",
+					"stylua",
 				},
 			},
 		},
@@ -26,6 +27,28 @@ return {
 			local lspconfig = require("mason-lspconfig")
 
 			lspconfig.setup(opts)
+
+			vim.filetype.add({
+				filename = {
+					["docker-compose.yml"] = "yaml.docker-compose",
+					["docker-compose.yaml"] = "yaml.docker-compose",
+					["compose.yml"] = "yaml.docker-compose",
+					["compose.yaml"] = "yaml.docker-compose",
+				},
+			})
+
+			vim.lsp.config("jsonls", {
+				before_init = function(_, new_config)
+					new_config.settings.json.schemas = new_config.settings.json.schemas or {}
+					vim.list_extend(new_config.settings.json.schemas, require("schemastore").json.schemas())
+				end,
+				settings = {
+					json = {
+						format = { enable = true },
+						validate = { enable = true },
+					},
+				},
+			})
 
 			vim.lsp.config("rust-analyzer", {
 				on_attach = function(_, bufnr)
@@ -47,6 +70,9 @@ return {
 								"vim",
 								"require",
 							},
+						},
+						workspace = {
+							ignoreDir = { ".git" },
 						},
 					},
 				},
