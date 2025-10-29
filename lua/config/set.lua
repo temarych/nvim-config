@@ -16,5 +16,6 @@ vim.opt.incsearch = true
 vim.opt.termguicolors = true
 
 vim.opt.pumheight = 10
+vim.opt.pumwidth = 15
 
 vim.opt.updatetime = 750

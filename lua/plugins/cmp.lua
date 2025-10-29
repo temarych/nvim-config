@@ -87,7 +87,15 @@ return {
 			}),
 			formatting = {
 				format = function(entry, vim_item)
+					local MAX_WIDTH = 50
+					local ELLIPSIS = "..."
+
 					vim_item.kind = kind_icons[vim_item.kind] .. " " .. vim_item.kind
+
+					if vim_item.menu and #vim_item.menu > MAX_WIDTH then
+						vim_item.menu = ELLIPSIS .. vim_item.menu:sub(-MAX_WIDTH + #ELLIPSIS)
+					end
+
 					return vim_item
 				end,
 			},
