@@ -5,6 +5,10 @@ return {
 	opts = {
 		view_options = {
 			show_hidden = true,
+			sort = {
+				{ "type", "asc" },
+				{ "name", "asc" },
+			},
 		},
 	},
 	dependencies = { "nvim-tree/nvim-web-devicons" },
