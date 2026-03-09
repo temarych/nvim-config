@@ -19,3 +19,4 @@ vim.opt.pumheight = 10
 vim.opt.pumwidth = 15
 
 vim.opt.updatetime = 750
+vim.opt.scrolloff = 8
